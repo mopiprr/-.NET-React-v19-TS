@@ -29,13 +29,16 @@ function ContactRoute() {
     <div className="contact">
       <h2>Contact</h2>
       {mutation.isSuccess ? (
-        <h3>Submitted!</h3>
+        <h3 className="text-center font-normal text-[30px] m-12.5 text-secondary font-pacifico">Submitted!</h3>
       ) : (
-        <form onSubmit={mutation.mutate}>
-          <input name="name" placeholder="Name" />
-          <input type="email" name="email" placeholder="Email" />
-          <textarea placeholder="Message" name="message"></textarea>
-          <button>Submit</button>
+        <form onSubmit={mutation.mutate} className="flex flex-col items-center justify-center">
+          <input className="w-125 p-2 border-2 border-border mb-[15px] mt-[15px] rounder-[5px] my-[15px] focus:border-primary focus:outline-none disabled:bg-[#999]"
+          name="name" placeholder="Name" />
+          <input className="w-125 p-2 border-2 border-border mb-[15px] mt-[15px] rounded-[5px] my-[15px] focus:border-primary focus:outline-none disabled:bg-[#999]" 
+          type="email" name="email" placeholder="Email" />
+          <textarea className="min-h-50 w-125 p-2 border-2 border-border mb-[15px] mt-[15px] rounded-[5px] my-[15px] focus:border-primary focus:outline-none disabled:bg-[#999]"
+          placeholder="Message" name="message"></textarea>
+          <button className="border border-primary bg-transparent text-primary font-pacifico text-5 py-[5px] px-[15px] rounded-[5px] inline-block curson-pointer disabled:opacity-50 disabled:bg-[#ccc]">Submit</button>
         </form>
       )}
     </div>
