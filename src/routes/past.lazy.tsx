@@ -46,7 +46,8 @@ function PastOrdersRoute() {
   });
   if (isLoading) {
     return (
-      <div className="past-orders">
+      // past-orders
+      <div className="min-h-[650px] max-w-[900px] w-[90%] mx-auto">
         <h2>LOADING …</h2>
       </div>
     );
@@ -56,35 +57,37 @@ function PastOrdersRoute() {
   }
 //   throw new Error("lol");
   return (
-    <div className="past-orders">
-      <table>
+    // past-orders
+    <div className="min-h-[650px] max-w-[900px] w-[90%] mx-auto">
+      <table className="w-full border-collapse my-[25px] text-[0.9em] font-sans min-w-[400px] border border[#ddd]">
         <thead>
-          <tr>
-            <td>ID</td>
-            <td>Date</td>
-            <td>Time</td>
+          <tr className="bg-secondary text-white text-left">
+            <td className="py-3 px-[15px] text-center">ID</td>
+            <td className="py-3 px-[15px] text-center">Date</td>
+            <td className="py-3 px-[15px] text-center">Time</td>
           </tr>
         </thead>
         <tbody>
           {data.map((order) => (
-            <tr key={order.order_id}>
-              <td>
+            <tr key={order.order_id} className="border-b border-[#ddd] even:bg-[f6fef0] last:border-b-2 last:border-secondary">
+              <td className="py-3 px-[15px] text-center">
                 <button onClick={() => setFocusedOrder(order.order_id)}>
                     {order.order_id}
                 </button>
                 </td>
-                <td>{order.date}</td>
-                <td>{order.time}</td>
+                <td className="py-3 px-[15px] text-center">{order.date}</td>
+                <td className="py-3 px-[15px] text-center">{order.time}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className="pages">
-        <button disabled={page <= 1} onClick={() => setPage(page - 1)}>
+      {/* pages */}
+      <div className="flex justify-evenly items-center">
+        <button className="btn" disabled={page <= 1} onClick={() => setPage(page - 1)}>
           Previous
         </button>
-        <div>{page}</div>
-        <button disabled={data.length < 10} onClick={() => setPage(page + 1)}>
+        <div font-pacifico text-xl tesxt-primary>{page}</div>
+        <button className="btn" disabled={data.length < 10} onClick={() => setPage(page + 1)}>
           Next
         </button>
       </div>
@@ -92,28 +95,28 @@ function PastOrdersRoute() {
             <Modal>
             <h2>Order #{focusedOrder}</h2>
             {!isLoadingPastOrder && pastOrderData ? (
-                <table>
+                <table className="w-full border-collapse my-[25px] text-[0.9em] font-sans min-w-[400px] border border[#ddd]">
                 <thead>
-                    <tr>
-                    <td>Image</td>
-                    <td>Name</td>
-                    <td>Size</td>
-                    <td>Quantity</td>
-                    <td>Price</td>
-                    <td>Total</td>
+                    <tr className="bg-secondary text-white text-left">
+                      <td className="py-3 px-[15px] text-center">Image</td>
+                      <td className="py-3 px-[15px] text-center">Name</td>
+                      <td className="py-3 px-[15px] text-center">Size</td>
+                      <td className="py-3 px-[15px] text-center">Quantity</td>
+                      <td className="py-3 px-[15px] text-center">Price</td>
+                      <td className="py-3 px-[15px] text-center">Total</td>
                     </tr>
                 </thead>
                 <tbody>
                     {pastOrderData.orderItems.map((pizza) => (
-                    <tr key={`${pizza.pizzaTypeId}_${pizza.size}`}>
+                    <tr key={`${pizza.pizzaTypeId}_${pizza.size}`} className="border-b border-[#ddd] even:bg-[f6fef0] last:border-b-2 last:border-secondary">
                         <td>
-                        <img src={pizza.image} alt={pizza.name} />
+                        <img className="w-[50px]" src={pizza.image} alt={pizza.name} />
                         </td>
-                        <td>{pizza.name}</td>
-                        <td>{pizza.size}</td>
-                        <td>{pizza.quantity}</td>
-                        <td>{intl.format(pizza.price)}</td>
-                        <td>{intl.format(pizza.total)}</td>
+                        <td className="py-3 px-[15px] text-center">{pizza.name}</td>
+                        <td className="py-3 px-[15px] text-center">{pizza.size}</td>
+                        <td className="py-3 px-[15px] text-center">{pizza.quantity}</td>
+                        <td className="py-3 px-[15px] text-center">{intl.format(pizza.price)}</td>
+                        <td className="py-3 px-[15px] text-center">{intl.format(pizza.total)}</td>
                     </tr>
                     ))}
                 </tbody>
