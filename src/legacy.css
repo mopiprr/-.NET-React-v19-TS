@@ -1,9 +1,9 @@
-:root {
-  --primary: #da2f04;
-  --secondary: #33670a;
-  --background: #fffaee;
-  --border: #ccc;
-  --font: Pacifico, cursive, sans-serif;
+@theme {
+  --color-primary: #da2f04;
+  --color-secondary: #33670a;
+  --color-background: #fffaee;
+  --color-border: #ccc;
+  --font-pacifico: Pacifico, cursive, sans-serif;
 }
 
 * {
