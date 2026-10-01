@@ -14,6 +14,10 @@ export const Route = createLazyFileRoute("/order")({
   component: Order,
 });
 
+// shared by the three size radios: the label is the visible "card", the input is visually hidden
+const sizeLabelClass =
+  "mx-3.75 mb-2.5 inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-[5px] border border-[#999] bg-border text-[#999] peer-checked:bg-white peer-checked:text-[#333] peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary";
+
 function Order() {
   const [pizzaType, setPizzaType] = useState("pepperoni");
   const [pizzaSize, setPizzaSize] = useState<PizzaSize>("M");
@@ -62,7 +66,7 @@ function Order() {
   return (
     <div className="order">
       <h2>Create Order</h2>
-      <form
+      <form className="flex justify-between"
         onSubmit={(e) => {
             e.preventDefault();
             if (!selectedPizza || !price) {
@@ -71,10 +75,10 @@ function Order() {
             setCart([...cart, { pizza: selectedPizza, size: pizzaSize, price }]);
         }}
         >
-        <div>
-          <div>
-            <label htmlFor="pizza-type">Pizza Type</label>
-            <select name="pizza-type" value={pizzaType} onChange={(e) => setPizzaType(e.target.value)}>
+        <div className="my-2.5 w-full border-r border-border p-3.75 text-center">
+          <div className="my-2.5 text-center">
+            <label htmlFor="pizza-type" className="mb-2.5 block text-[20px] text-secondary">Pizza Type</label>
+            <select className="form-select mb-7.5 block w-full py-1.25 pl-1.25 text-[16px]" name="pizza-type" value={pizzaType} onChange={(e) => setPizzaType(e.target.value)}>
               { pizzaTypes.map((pizza) => (
                 <option key={pizza.id} value={pizza.id}>
                   {pizza.name}
@@ -83,9 +87,9 @@ function Order() {
                
             </select>
           </div>
-          <div>
-            <label htmlFor="pizza-size">Pizza Size</label>
-            <div>
+          <div className="my-2.5 text-center">
+            <label htmlFor="pizza-size" className="mb-2.5 block text-[20px] text-secondary">Pizza Size</label>
+            <div className="my-2.5 text-center">
               <span>
                 <input
                   onChange={(e) => setPizzaSize(e.target.value as PizzaSize)}
@@ -95,7 +99,7 @@ function Order() {
                   value="S"
                   id="pizza-s"
                 />
-                <label htmlFor="pizza-s">Small</label>
+                <label htmlFor="pizza-s" className="{sizeLabelClass}">Small</label>
               </span>
               <span>
                 <input
@@ -106,7 +110,7 @@ function Order() {
                   value="M"
                   id="pizza-m"
                 />
-                <label htmlFor="pizza-m">Medium</label>
+                <label htmlFor="pizza-m" className="{sizeLabelClass}">Medium</label>
               </span>
               <span>
                 <input
@@ -117,16 +121,16 @@ function Order() {
                   value="L"
                   id="pizza-l"
                 />
-                <label htmlFor="pizza-l">Large</label>
+                <label htmlFor="pizza-l" className="{sizeLabelClaass}">Large</label>
               </span>
             </div>
           </div>
-          <button type="submit">Add to Cart</button>
+          <button type="submit" className="inline-block cursor-pointer rounded-[5px] border border-primary bg-transparent px-3.75 py-1.25 font-pacifico text-[20px] text-primary hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-border disabled:opacity-50">Add to Cart</button>
         </div>
         {loading || !selectedPizza ? (
             <h3> loading.....</h3>
         ) : (
-            <div className="order-pizza">
+            <div className="my-2.5 ml-6.25 w-full p-3.75 text-center">
           <Pizza
             name={selectedPizza.name}
             description={selectedPizza.description}
