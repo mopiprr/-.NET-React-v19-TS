@@ -12,6 +12,10 @@ export const Route = createLazyFileRoute("/past")({
   component: ErrorBoundaryWrappedPastOrderRoutes,
 });
 
+const buttonClass = "inline-block cursor-pointer rounded-[5px] border border-primary bg-transparent px-3.75 py-1.25 font-pacifico text-[20px] text-primary disabled:bg-[#ccc] disabled:opacity-50"; 
+const trClass = "border-b border-[#ddd] even:bg-[f6fef0] last:border-b-2 last:border-secondary"
+const tdClass ="py-3 px-[15px] text-center";
+
 function ErrorBoundaryWrappedPastOrderRoutes() {
   return (
     <ErrorBoundary>
@@ -56,35 +60,40 @@ function PastOrdersRoute() {
   }
 //   throw new Error("lol");
   return (
-    <div className="past-orders">
-      <table>
+    //past-orders
+    <div className="min-h-[650px] min-w-[900px] w-[90%] mx-auto">
+      <table className="w-full my-[25px] mx-0 font-sans min-w-[400px] border-b border-[#ddd] border-collapse text-[0.9em]">
         <thead>
-          <tr>
-            <td>ID</td>
-            <td>Date</td>
-            <td>Time</td>
+          <tr className="bg-secondary text-white text-left">
+            <td className={tdClass}>ID</td>
+            <td className={tdClass}>Date</td>
+            <td className={tdClass}>Time</td>
           </tr>
         </thead>
         <tbody>
           {data.map((order) => (
-            <tr key={order.order_id}>
+            <tr className={trClass}
+            key={order.order_id}>
               <td>
                 <button onClick={() => setFocusedOrder(order.order_id)}>
                     {order.order_id}
                 </button>
                 </td>
-                <td>{order.date}</td>
-                <td>{order.time}</td>
+                <td className={tdClass}>{order.date}</td>
+                <td className={tdClass}>{order.time}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className="pages">
-        <button disabled={page <= 1} onClick={() => setPage(page - 1)}>
+      {/* pages */}
+      <div className="flex items-center justify-evenly">
+        <button className={buttonClass}
+        disabled={page <= 1} onClick={() => setPage(page - 1)}>
           Previous
         </button>
         <div>{page}</div>
-        <button disabled={data.length < 10} onClick={() => setPage(page + 1)}>
+        <button className={buttonClass}
+        disabled={data.length < 10} onClick={() => setPage(page + 1)}>
           Next
         </button>
       </div>
@@ -92,28 +101,29 @@ function PastOrdersRoute() {
             <Modal>
             <h2>Order #{focusedOrder}</h2>
             {!isLoadingPastOrder && pastOrderData ? (
-                <table>
+                <table className="w-full my-[25px] mx-0 font-sans min-w-[400px] border-b border-[#ddd] border-collapse text-[0.9em]">
                 <thead>
-                    <tr>
-                    <td>Image</td>
-                    <td>Name</td>
-                    <td>Size</td>
-                    <td>Quantity</td>
-                    <td>Price</td>
-                    <td>Total</td>
+                    <tr className={trClass}>
+                      <td className={tdClass}>Image</td>
+                      <td className={tdClass}>Name</td>
+                      <td className={tdClass}>Size</td>
+                      <td className={tdClass}>Quantity</td>
+                      <td className={tdClass}>Price</td>
+                      <td className={tdClass}>Total</td>
                     </tr>
                 </thead>
                 <tbody>
                     {pastOrderData.orderItems.map((pizza) => (
-                    <tr key={`${pizza.pizzaTypeId}_${pizza.size}`}>
-                        <td>
+                    <tr className={trClass}
+                    key={`${pizza.pizzaTypeId}_${pizza.size}`}>
+                        <td className={tdClass}>
                         <img src={pizza.image} alt={pizza.name} />
                         </td>
-                        <td>{pizza.name}</td>
-                        <td>{pizza.size}</td>
-                        <td>{pizza.quantity}</td>
-                        <td>{intl.format(pizza.price)}</td>
-                        <td>{intl.format(pizza.total)}</td>
+                        <td className={tdClass}>{pizza.name}</td>
+                        <td className={tdClass}>{pizza.size}</td>
+                        <td className={tdClass}>{pizza.quantity}</td>
+                        <td className={tdClass}>{intl.format(pizza.price)}</td>
+                        <td className={tdClass}>{intl.format(pizza.total)}</td>
                     </tr>
                     ))}
                 </tbody>
@@ -121,7 +131,7 @@ function PastOrdersRoute() {
             ) : (
                 <p>Loading …</p>
             )}
-            <button onClick={() => setFocusedOrder(undefined)}>Close</button>
+            <button className={buttonClass} onClick={() => setFocusedOrder(undefined)}>Close</button>
             </Modal>
         ) : null
         }

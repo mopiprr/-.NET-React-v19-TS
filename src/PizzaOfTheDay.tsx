@@ -13,10 +13,10 @@ const PizzaOfTheDay = () => {
   }
 
   return (
-    <div className="border-t border-border mt-[50px] w-full">
-      <h2 className="text-center">Pizza of the Day</h2>
+    <div className="border-t border-border mt-[50px] w-full text-primary">
+      <h2 className="text-center font-pacifico">Pizza of the Day</h2>
       <div className="flex items-center justify-center">
-        <div className="mr-[30px] leading-8 text-center">
+        <div className="mr-[30px] leading-loose text-center">
           <h3>{pizzaOfTheDay.name}</h3>
           <p>{pizzaOfTheDay.description}</p>
           <p>

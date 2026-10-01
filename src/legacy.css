@@ -6,6 +6,14 @@
   --font-pacifico: Pacifico, cursive, sans-serif;
 }
 
+:root {
+  --primary: var(--color-primary);
+  --secondary: var(--color-secondary);
+  --background: var(--color-background);
+  --border: var(--color-border);
+  --font: var(--font-pacifico);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -93,11 +101,11 @@ nav > a {
 }
 
 h2 {
-  font-family: var(--font);
+  font-family: var(--font-pacifico);
   font-size: 40px;
   line-height: auto;
   font-weight: 400;
-  color: var(--primary);
+  color: var(--color-primary);
   text-align: center;
 }
 
@@ -109,14 +117,14 @@ h2::after {
   height: 30px;
   background: conic-gradient(
     transparent 90deg,
-    var(--primary) 90deg 180deg,
+    var(--color-primary) 90deg 180deg,
     transparent 180deg 270deg,
-    var(--primary) 270deg
+    var(--color-primary) 270deg
   );
   background-repeat: repeat;
   background-size: 30px 30px;
   background-position: top left;
-}
+} 
 
 .order {
   width: 100%;
