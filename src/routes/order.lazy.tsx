@@ -92,6 +92,7 @@ function Order() {
             <div className="my-2.5 text-center">
               <span>
                 <input
+                  className="peer hidden"
                   onChange={(e) => setPizzaSize(e.target.value as PizzaSize)}
                   checked={pizzaSize === "S"}
                   type="radio"
@@ -99,10 +100,11 @@ function Order() {
                   value="S"
                   id="pizza-s"
                 />
-                <label htmlFor="pizza-s" className="{sizeLabelClass}">Small</label>
+                <label htmlFor="pizza-s" className={sizeLabelClass}>Small</label>
               </span>
               <span>
                 <input
+                  className="peer hidden"
                   onChange={(e) => setPizzaSize(e.target.value as PizzaSize)}
                   checked={pizzaSize === "M"}
                   type="radio"
@@ -110,10 +112,11 @@ function Order() {
                   value="M"
                   id="pizza-m"
                 />
-                <label htmlFor="pizza-m" className="{sizeLabelClass}">Medium</label>
+                <label htmlFor="pizza-m" className={sizeLabelClass}>Medium</label>
               </span>
               <span>
                 <input
+                  className="peer hidden"
                   onChange={(e) => setPizzaSize(e.target.value as PizzaSize)}
                   checked={pizzaSize === "L"}
                   type="radio"
@@ -121,7 +124,7 @@ function Order() {
                   value="L"
                   id="pizza-l"
                 />
-                <label htmlFor="pizza-l" className="{sizeLabelClaass}">Large</label>
+                <label htmlFor="pizza-l" className={sizeLabelClass}>Large</label>
               </span>
             </div>
           </div>

@@ -13,18 +13,18 @@ const PizzaOfTheDay = () => {
   }
 
   return (
-    <div className="pizza-of-the-day">
-      <h2>Pizza of the Day</h2>
-      <div>
-        <div className="pizza-of-the-day-info">
+    <div className="border-t border-border mt-[50px] w-full">
+      <h2 className="text-center">Pizza of the Day</h2>
+      <div className="flex items-center justify-center">
+        <div className="mr-[30px] leading-8 text-center">
           <h3>{pizzaOfTheDay.name}</h3>
           <p>{pizzaOfTheDay.description}</p>
-          <p className="pizza-of-the-day-price">
+          <p>
             From: <span>{intl.format(pizzaOfTheDay.sizes.S)}</span>
           </p>
         </div>
         <img
-          className="pizza-of-the-day-image"
+          className="max-w-[200px] rounded-[5px] border border-border"
           src={pizzaOfTheDay.image}
           alt={pizzaOfTheDay.name}
         />

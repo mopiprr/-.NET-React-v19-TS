@@ -7,12 +7,16 @@ export default function Header() {
     const [cart] = useContext(CartContext);
 
   return (
-    <nav>
-      <Link to={"/"}>
-        <h1 className="logo">Padre Gino's Pizza</h1>
+    <nav className="w-full grid grid-cols-5 border-b border-border">
+      <Link to={"/"} className="col-start-2 col-span-3 flex items-center justify-center">
+        <img
+          src="/public/padre_gino.svg"
+          alt="Padre Gino's Pizza"
+          className="h-[110px] border-b border-border py-5"
+        />
       </Link>
-      <div className="nav-cart">
-        🛒<span className="nav-cart-number" data-testid="cart-number">{cart.length}</span>
+      <div className="col-start-5 flex items-center justify-center text-[40px]">
+        🛒<span className="bg-secondary text-white flex items-center justify-center relative -top-[17px] -left-[17px] w-5 h-5 text-[18px] rounded-full" data-testid="cart-number">{cart.length}</span>
       </div>
     </nav>
   );
