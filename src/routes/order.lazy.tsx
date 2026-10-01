@@ -64,9 +64,9 @@ function Order() {
   }
 
   return (
-    <div className="order">
-      <h2>Create Order</h2>
-      <form className="flex justify-between"
+    <div className="mx-auto grid max-w-325 grid-cols-1 gap-12.5 lg:grid-cols-[2fr_1fr]">
+      <h2 className="w-full lg:ml-[5%]">Create Order</h2>
+      <form className="flex flex-col md:flex-row md:justify-between"
         onSubmit={(e) => {
             e.preventDefault();
             if (!selectedPizza || !price) {
@@ -75,8 +75,8 @@ function Order() {
             setCart([...cart, { pizza: selectedPizza, size: pizzaSize, price }]);
         }}
         >
-        <div className="my-2.5 w-full border-r border-border p-3.75 text-center">
-          <div className="my-2.5 text-center">
+        <div className="my-2.5 w-full border-r border-border p-3.75 text-center md:border-r md-border-b-0">
+          <div className="my-2.5 w-full p-3.75 text-center md:ml-6.25">
             <label htmlFor="pizza-type" className="mb-2.5 block text-[20px] text-secondary">Pizza Type</label>
             <select className="form-select mb-7.5 block w-full py-1.25 pl-1.25 text-[16px]" name="pizza-type" value={pizzaType} onChange={(e) => setPizzaType(e.target.value)}>
               { pizzaTypes.map((pizza) => (
@@ -125,7 +125,7 @@ function Order() {
               </span>
             </div>
           </div>
-          <button type="submit" className="inline-block cursor-pointer rounded-[5px] border border-primary bg-transparent px-3.75 py-1.25 font-pacifico text-[20px] text-primary hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-border disabled:opacity-50">Add to Cart</button>
+          <button type="submit" className="btn">Add to Cart</button>
         </div>
         {loading || !selectedPizza ? (
             <h3> loading.....</h3>
