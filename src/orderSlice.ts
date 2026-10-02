@@ -17,17 +17,18 @@ export const orderSlice = createSlice({
     initialState,
     reducers: {
         setPizzaType(state, action: PayloadAction<string>) {
-            state.PizzaType = action.payload;
+            state.pizzaType = action.payload;
         },
         setPizzaSize(state, action: PayloadAction<PizzaSize>) {
-            state.PizzaSize = action.payload;
+            state.pizzaSize = action.payload;
         },
     },
     selectors: {
-        selectPizzaType: (PizzaType) => order.PizzaType,
-        selectPizzaSize: (PizzaSize) => order.PizzaSize,
+        selectPizzaType: (state) => state.pizzaType,
+        selectPizzaSize: (state) => state.pizzaSize,
     },
 });
 
 export const { setPizzaType, setPizzaSize } = orderSlice.actions;
 export const { selectPizzaType, selectPizzaSize } = orderSlice.selectors;
+export default orderSlice.reducer;

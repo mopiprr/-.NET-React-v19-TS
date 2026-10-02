@@ -31,6 +31,9 @@ function Order() {
   const cart = useAppSelector(selectCartItems);
   const dispatch = useAppDispatch();
 
+  const pizzaType = useAppSelector(selectPizzaType);
+  const pizzaSize = useAppSelector(selectPizzaSize);
+
   let price: string | undefined;
   let selectedPizza: PizzaType | undefined;
   if (!loading) {
