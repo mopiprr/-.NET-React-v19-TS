@@ -6,6 +6,14 @@
   --font-pacifico: Pacifico, cursive, sans-serif;
 }
 
+:root {
+  --primary: #da2f04;
+  --secondary: #33670a;
+  --background: #fffaee;
+  --border: #ccc;
+  --font: Pacifico, cursive, sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;

@@ -19,6 +19,7 @@ const mockPizzas = [
 ];
 
 test("menampilkan judul halaman Create Order", () => {
+  fetchMocker.mockResponse(JSON.stringify(mockPizzas));
   const Component = Route.options.component!;
   const screen = render(
     <CartContext.Provider value={[[], () => {}]}>

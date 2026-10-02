@@ -15,7 +15,7 @@ test("menampilkan judul halaman Contact", () => {
   const screen = render(
     <QueryClientProvider client={queryClient}>
       <Route.options.component />
-    </QueryClientProvider>
+    </QueryClientProvider>,
   );
 
   const heading = screen.getByRole("heading", { level: 2 });
@@ -26,7 +26,7 @@ test("menampilkan tombol Submit pada formulir", () => {
   const screen = render(
     <QueryClientProvider client={queryClient}>
       <Route.options.component />
-    </QueryClientProvider>
+    </QueryClientProvider>,
   );
 
   const btn = screen.getByRole("button");

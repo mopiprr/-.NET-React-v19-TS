@@ -64,7 +64,7 @@ function Order() {
   }
 
   return (
-    <div className="order">
+    <div className="w-full ml-[5%]">
       <h2>Create Order</h2>
       <form className="flex justify-between"
         onSubmit={(e) => {
