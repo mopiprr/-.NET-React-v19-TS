@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-router";
 // import { CartContext } from "../Contexts";
 
-import { Provider } from "react-redux";
+import { Provider } from "react-redux"; 
 import { makeStore } from "../store";
 import type { CartItem } from "../cartSlice";
 
