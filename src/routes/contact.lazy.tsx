@@ -3,19 +3,19 @@ import { useMutation } from "@tanstack/react-query";
 import postContact from "../api/postContact";
 import type { SubmitEvent } from "react";
 
+import { buttonClass } from "../Cart";
+
 export const Route = createLazyFileRoute("/contact")({
   component: ContactRoute,
 });
 
 function getString(formData: FormData, key: string): string {
   const value = formData.get(key);
-  return typeof value === "string" ? value :"";
+  return typeof value === "string" ? value : "";
 }
 
 const inputClass =
-  "my-3.75 w-[500px] rounded-[5px] border-2 border-border p-2 focus:border-primary focus:outline-none disabled:bg-[#999]";
-const buttonClass =
-  "inline-block cursor-pointer rounded-[5px] border border-primary bg-transparent px-3.75 py-1.25 font-pacifico text-[20px] text-primary hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-border disabled:opacity-50";
+  "my-[15px] w-[500px] rounded-[5px] border-2 border-border p-2 focus:border-primary focus:outline-none disabled:bg-[#999]";
 
 function ContactRoute() {
   const mutation = useMutation({
@@ -50,7 +50,7 @@ function ContactRoute() {
             placeholder="Email"
           />
           <textarea
-            className="my-3.75 min-h-[200px] w-[500px] rounded-[5px] border-2 border-border p-2 focus:border-primary focus:outline-none"
+            className={`${inputClass} min-h-[200px]`}
             placeholder="Message"
             name="message"
           ></textarea>

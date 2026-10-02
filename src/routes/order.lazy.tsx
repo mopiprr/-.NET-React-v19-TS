@@ -2,8 +2,10 @@ import Pizza from "../Pizza.jsx";
 import type { Pizza as PizzaType, PizzaSize } from "../APIResponseTypes.js"
 import {useState, useEffect, useContext} from "react";
 import Cart from "../Cart.jsx";
-import { CartContext } from "../Contexts.js";
+// import { CartContext } from "../Contexts.js";
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { useAppDispatch, useAppSelector } from "../hooks.js";
+import { addToCart, clearCart, selectCartCount, selectCartItems } from "../cartSlice.js";
 
 const intl = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -23,7 +25,10 @@ function Order() {
   const [pizzaSize, setPizzaSize] = useState<PizzaSize>("M");
   const [pizzaTypes, setPizzaTypes] = useState<PizzaType[]>([]);
   const [loading, setLoading] = useState(true);
-  const [cart, setCart] = useContext(CartContext);
+  // const [cart, setCart] = useContext(CartContext);
+
+  const cart = useAppSelector(selectCartItems);
+  const dispatch = useAppDispatch();
 
   let price: string | undefined;
   let selectedPizza: PizzaType | undefined;
@@ -59,7 +64,8 @@ function Order() {
         }),
     });
 
-  setCart([]);
+  // setCart([]);
+  dispatch(clearCart());
   setLoading(false);
   }
 
@@ -72,7 +78,8 @@ function Order() {
             if (!selectedPizza || !price) {
               return;
             }
-            setCart([...cart, { pizza: selectedPizza, size: pizzaSize, price }]);
+            // setCart([...cart, { pizza: selectedPizza, size: pizzaSize, price }]);
+            dispatch(addToCart({ pizza: selectedPizza, size: pizzaSize, price }));
         }}
         >
         <div className="my-2.5 w-full border-r border-border p-3.75 text-center">
