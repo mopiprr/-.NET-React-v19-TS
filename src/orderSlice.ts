@@ -24,8 +24,8 @@ export const orderSlice = createSlice({
         },
     },
     selectors: {
-        selectPizzaType: (state) => state.pizzaType,
-        selectPizzaSize: (state) => state.pizzaSize,
+        selectPizzaType: (order) => order.pizzaType,
+        selectPizzaSize: (order) => order.pizzaSize,
     },
 });
 
