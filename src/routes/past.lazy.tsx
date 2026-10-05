@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { skipToken, useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import getPastOrders from "../api/getPastOrders";
-import getPastOrder from "../api/getPastOrder";
+// import getPastOrders from "../api/getPastOrders";
+// import getPastOrder from "../api/getPastOrder";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 import Modal from "../Modal";
 import ErrorBoundary from "../ErrorBoundary";
 import type { PastOrder, PastOrderDetail } from "../APIResponseTypes";
+import { useGetPastOrderQuery, useGetPastOrdersQuery } from "../api/pizzaApi";
 
 export const Route = createLazyFileRoute("/past")({
   component: ErrorBoundaryWrappedPastOrderRoutes,
@@ -19,6 +21,8 @@ function ErrorBoundaryWrappedPastOrderRoutes() {
     </ErrorBoundary>
   );
 }
+
+
 
 const intl = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -39,19 +43,24 @@ function PastOrdersRoute() {
   const [page, setPage] = useState(1);
   const [focusedOrder, setFocusedOrder] = useState<number>();
 
-  const { isLoading: isLoadingPastOrder, data: pastOrderData } =
-    useQuery<PastOrderDetail>({
-      queryKey: ["past-order", focusedOrder],
-      queryFn: focusedOrder ? () => getPastOrder(focusedOrder) : skipToken,
-      enabled: !!focusedOrder,
-      staleTime: 24 * 60 * 60 * 1000, // one day in milliseconds,
-    });
+  const { data: pastOrderData, isLoading: isLoadingPastOrder } = useGetPastOrderQuery(
+  focusedOrder ?? skipToken,
+  );
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["past-orders", page],
-    queryFn: () => getPastOrders(page),
-    staleTime: 30000,
-  });
+  // const { isLoading: isLoadingPastOrder, data: pastOrderData } =
+  //   useQuery<PastOrderDetail>({
+  //     queryKey: ["past-order", focusedOrder],
+  //     queryFn: focusedOrder ? () => getPastOrder(focusedOrder) : skipToken,
+  //     enabled: !!focusedOrder,
+  //     staleTime: 24 * 60 * 60 * 1000, // one day in milliseconds,
+  //   });
+  
+  const { isLoading, data } = useGetPastOrdersQuery(page);
+  // const { isLoading, data } = useQuery({
+  //   queryKey: ["past-orders", page],
+  //   queryFn: () => getPastOrders(page),
+  //   staleTime: 30000,
+  // });
 
   if (isLoading) {
     return (
