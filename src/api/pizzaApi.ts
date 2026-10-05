@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { Pizza, PastOrderDetail, PastOrder } from "../APIResponseTypes";
+import type { CartItem } from "../cartSlice";
 
 export const pizzaApi = createApi ({
     reducerPath: "pizzaApi",
@@ -18,7 +19,22 @@ export const pizzaApi = createApi ({
         getPastOrders: build.query<PastOrder[], number>({
             query: (page = 1) => `past-orders?page=${page}`,
         }),
+        placeOrder: build.mutation<void, CartItem[]>({
+            query: (cart) => ({
+                url: "order",
+                method: "POST",
+                body: {cart},
+            }),
+            invalidatesTags: ["PastOrders"],
+        }),
+        postContact: build.mutation< 
+        { status: string },
+        { name: string; email: string; message: string }
+        >({ query: "contact",
+            method: "POST",
+            body,
+        }),
     }),
 });
 
-export const { useGetPizzasQuery, useGetPizzaOfTheDayQuery, useGetPastOrderQuery, useGetPastOrdersQuery } = pizzaApi;
+export const { useGetPizzasQuery, useGetPizzaOfTheDayQuery, useGetPastOrderQuery, useGetPastOrdersQuery, usePlaceOrderMutation, usePostContactMutation } = pizzaApi;

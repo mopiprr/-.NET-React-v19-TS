@@ -13,7 +13,7 @@ import { routeTree } from "./routeTree.gen";
 import "./index.css"
 import { store } from "./store"
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 
 
@@ -65,15 +65,15 @@ declare module "@tanstack/react-router" {
   }
 }
 
-const queryClient = new QueryClient()
+// const queryClient = new QueryClient()
 
 const App = () => {
   return (
     <StrictMode>
       <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
+        {/* <QueryClientProvider client={queryClient}> */}
           <RouterProvider router={router} />
-        </QueryClientProvider>
+        {/* </QueryClientProvider> */}
       </Provider>
     </StrictMode>
   );
