@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import getPastOrders from "../api/getPastOrders";
+// import getPastOrders from "../api/getPastOrders";
 // import getPastOrder from "../api/getPastOrder";
 import { skipToken } from "@reduxjs/toolkit/query";
 
 import Modal from "../Modal";
 import ErrorBoundary from "../ErrorBoundary";
 import type { PastOrder, PastOrderDetail } from "../APIResponseTypes";
-import { useGetPastOrderQuery } from "../api/pizzaApi";
+import { useGetPastOrderQuery, useGetPastOrdersQuery } from "../api/pizzaApi";
 
 export const Route = createLazyFileRoute("/past")({
   component: ErrorBoundaryWrappedPastOrderRoutes,
@@ -54,12 +54,13 @@ function PastOrdersRoute() {
   //     enabled: !!focusedOrder,
   //     staleTime: 24 * 60 * 60 * 1000, // one day in milliseconds,
   //   });
-
-  const { isLoading, data } = useQuery({
-    queryKey: ["past-orders", page],
-    queryFn: () => getPastOrders(page),
-    staleTime: 30000,
-  });
+  
+  const { isLoading, data } = useGetPastOrdersQuery(page);
+  // const { isLoading, data } = useQuery({
+  //   queryKey: ["past-orders", page],
+  //   queryFn: () => getPastOrders(page),
+  //   staleTime: 30000,
+  // });
 
   if (isLoading) {
     return (
