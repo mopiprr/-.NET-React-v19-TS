@@ -7,7 +7,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { useAppDispatch, useAppSelector } from "../hooks.js";
 import { addToCart, clearCart, selectCartCount, selectCartItems } from "../cartSlice.js";
 import { selectPizzaSize, selectPizzaType, setPizzaSize, setPizzaType } from "../orderSlice.js";
-import { useGetPizzasQuery } from "../api/pizzaApi.js";
+import { useGetPizzasQuery, usePlaceOrderMutation } from "../api/pizzaApi";
 
 const intl = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -31,7 +31,6 @@ function Order() {
 
   const { data: pizzaTypes = [], isLoading: isLoadingPizzas } = useGetPizzasQuery();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const loading = isLoadingPizzas || isCheckingOut;
 
   const cart = useAppSelector(selectCartItems);
   const dispatch = useAppDispatch();
@@ -41,6 +40,15 @@ function Order() {
 
   let price: string | undefined;
   let selectedPizza: PizzaType | undefined;
+
+  const [placeOrder, {isLoading: isPlacingOrder}] = usePlaceOrderMutation();
+  const loading = isLoadingPizzas || isPlacingOrder;
+
+  async function checkout() {
+    await placeOrder(cart);
+    dispatch(clearCart());
+  }
+
   if (!loading) {
     selectedPizza = pizzaTypes.find((pizza) => pizzaType === pizza.id);
     price = selectedPizza ? intl.format(selectedPizza.sizes[pizzaSize]) : undefined;  
@@ -60,23 +68,25 @@ function Order() {
   //   setLoading(false);
   //   }
 
-  async function checkout() {
-    setIsCheckingOut(true);
 
-    await fetch("/api/order", {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-        cart,
-        }),
-    });
+
+  // async function checkout() {
+  //   setIsCheckingOut(true);
+
+  //   await fetch("/api/order", {
+  //       method: "POST",
+  //       headers: {
+  //       "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //       cart,
+  //       }),
+  //   });
 
   // setCart([]);
-  dispatch(clearCart());
-  setIsCheckingOut(false);
-  }
+  // dispatch(clearCart());
+  // setIsCheckingOut(false);
+  // }
 
   return (
     <div className="w-full ml-[5%]">
